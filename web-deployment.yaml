@@ -1,28 +1,21 @@
-apiVersion: apps/v1 
-kind: Deployment   
-metadata: 
-  name: wordpress-deployment 
-  labels:   
-    tier: frontend 
-    app: mywordpress
-spec: 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-webapp
+  labels:
+    app: web
+spec:
+  replicas: 2
   selector:
     matchLabels:
-       app: mywordpress 
-  replicas: 2 
-  template: 
+      app: web
+  template:
     metadata:
-       name: wordpress
-       labels:
-         app: mywordpress
-    spec: 
-       containers:
-         - name: wordpress 
-           image: wordpress 
-           ports: 
-           - containerPort: 80 
-           resources: 
-             requests: 
-               cpu: 500m 
-             limits:
-               cpu: 1000m
+      labels:
+        app: web
+    spec:
+      containers:
+      - name: webapp
+        image: mc0137/kubernetes-lab:micro
+        ports:
+        - containerPort: 5000
